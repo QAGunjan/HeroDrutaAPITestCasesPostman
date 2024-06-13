@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a34846d5-1d37-4be7-a42a-ca0b20bb31fb",
+		"_postman_id": "76fe7dbd-ea0a-435e-b044-74655de5fcb1",
 		"name": "Enterprise-App-UAT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "23057138"
@@ -3173,7 +3173,7 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Validate EmergencyContact_relation \", function () {\r",
-									"    pm.expect(jsonData.data.emergency.relation).to.eql(pm.environment.get(\"EmergencyContact_relationq\"));\r",
+									"    pm.expect(jsonData.data.emergency.relation).to.eql(pm.environment.get(\"EmergencyContact_relation\"));\r",
 									"});"
 								],
 								"type": "text/javascript",
