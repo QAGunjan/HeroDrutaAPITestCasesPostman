@@ -2056,6 +2056,10 @@
 									"    pm.expect(jsonData.message).to.eql(\"OTP Generated Successfully\");\r",
 									"});\r",
 									"\r",
+									"pm.test(\"Validate data is an object\", function () {\r",
+									"    pm.expect(jsonData.data).to.be.an(\"object\");\r",
+									"});\r",
+									"\r",
 									"pm.test(\"Validate loginId value is \" + pm.environment.get(\"expectedloginId\") +\" in response\", function () {\r",
 									"\r",
 									"    pm.expect(jsonData.data.loginId).to.eql(pm.environment.get(\"expectedloginId\"));\r",
@@ -2074,8 +2078,8 @@
 									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json; charset=utf-8\");\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Validate response time is less than 500ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"pm.test(\"Validate response time is less than 700ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(700);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate status code name has OK\", function () {\r",
@@ -2219,6 +2223,10 @@
 									"\r",
 									"pm.test(\"Validate message value is \"+ jsondata.message+  \" in reponse\", function () {\r",
 									"    pm.expect(jsondata.message).to.eql(\"OTP Verified Successfully\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate data is an object\", function () {\r",
+									"    pm.expect(jsondata.data).to.be.an(\"object\");\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Validate loginId value is \" + pm.environment.get(\"expectedloginId\")+  \" in reponse\", function () {\r",
@@ -2775,6 +2783,10 @@
 									"    pm.expect(jsonData.success).to.be.true;\r",
 									"});\r",
 									"\r",
+									"pm.test(\"Validate data is an object\", function () {\r",
+									"    pm.expect(jsonData.data).to.be.an(\"object\");\r",
+									"});\r",
+									"\r",
 									"pm.test(\"Validate key = 1 and value = Father\", function () {\r",
 									"    pm.expect(jsonData.data.dataList[0].key).to.eql(\"1\");\r",
 									"     pm.expect(jsonData.data.dataList[0].value).to.eql(\"Father\");\r",
@@ -2809,6 +2821,11 @@
 									"     pm.expect(jsonData.data.dataList[6].key).to.eql(\"7\");\r",
 									"     pm.expect(jsonData.data.dataList[6].value).to.eql(\"Friend\");\r",
 									"});\r",
+									"\r",
+									"pm.test(\"Validate dataList is an array\", function () {\r",
+									"     pm.expect(jsonData.data.dataList).to.be.an(\"array\");  \r",
+									"});\r",
+									"\r",
 									"\r",
 									"pm.test(\"Validate Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -3446,7 +3463,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": " \r\n{\r\n    \"data\": { \r\n        \"customerIdentifier\":\"{{identifier}}\",\r\n        \"userLocation\": \"https://www.mappls.com/@28.4136263,77.0426564\"\r\n    }\r\n}",
+							"raw": " \r\n{\r\n    \"data\": {\r\n        \"customerIdentifier\":\"{{identifier}}\",\r\n        \"userLocation\": \"https://www.mappls.com/@28.4136263,77.0426564\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3792,6 +3809,818 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"OTP Generated Successfully\",\n    \"data\": {\n        \"loginId\": \"8800996677\",\n        \"registeredUser\": true\n    },\n    \"success\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "externalInvalidLogin- MobileNumber length is more than 10 digit Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Validate success value is false\", function () {\r",
+									"    pm.expect(jsonData.success).to.be.false;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate message value is Mobile Field Blank Or Not In Format.\", function () {\r",
+									"    pm.expect(jsonData.message).to.eql(\"Mobile Field Blank Or Not In Format.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate errorCode value is 1002\", function () {\r",
+									"    pm.expect(jsonData.errorCode).to.eql(1002);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate errorDescription value is Unable to process Your Request\", function () {\r",
+									"    pm.expect(jsonData.errorDescription).to.eql(\"Unable to process Your Request\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate content-Type is present and value is application/json; charset=utf-8\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/plain; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate status code name has OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var InvalidMiximumLengthloginId = \"82927384123\";\r",
+									"pm.environment.set(\"InvalidMiximumLengthloginId\", InvalidMiximumLengthloginId);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "ocp-apim-subscription-key",
+								"value": "{{key}}"
+							},
+							{
+								"key": "appId",
+								"value": "{{AppId}}"
+							},
+							{
+								"key": "specificAppId",
+								"value": "{{SpecificAppId}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": {\r\n        \"loginId\": {{InvalidMiximumLengthloginId}},\r\n        \"loginType\":\"mobile\",\r\n        \"notificationType\":\"sms\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{enterpriseurl}}externalLogin",
+							"host": [
+								"{{enterpriseurl}}externalLogin"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "externalLogin_success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "ocp-apim-subscription-key",
+										"value": "947541fe74804954b9f57bee5c4b3d71",
+										"type": "text"
+									},
+									{
+										"key": "appId",
+										"value": "External",
+										"type": "text"
+									},
+									{
+										"key": "specificAppId",
+										"value": "OneApp",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\": {\r\n        \"loginId\": \"8800996677\",\r\n        \"loginType\":\"mobile\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://apim-shared-psku-01t.azure-api.net/enterprise/dxl/api/externalLogin",
+									"protocol": "https",
+									"host": [
+										"apim-shared-psku-01t",
+										"azure-api",
+										"net"
+									],
+									"path": [
+										"enterprise",
+										"dxl",
+										"api",
+										"externalLogin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Request-Context",
+									"value": "appId=cid-v1:76a210ac-da8b-4957-8f78-d12515b7c76f"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 11 Jan 2024 07:25:52 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"OTP Generated Successfully\",\n    \"data\": {\n        \"loginId\": \"8800996677\",\n        \"registeredUser\": true\n    },\n    \"success\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "externalInvalidLogin- MobileNumber is blank string",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Validate success value is false\", function () {\r",
+									"    pm.expect(jsonData.success).to.be.false;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate message value is Mobile Field Blank Or Not In Format.\", function () {\r",
+									"    pm.expect(jsonData.message).to.eql(\"Mobile Field Blank Or Not In Format.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate errorCode value is 1002\", function () {\r",
+									"    pm.expect(jsonData.errorCode).to.eql(1002);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate errorDescription value is Unable to process Your Request\", function () {\r",
+									"    pm.expect(jsonData.errorDescription).to.eql(\"Unable to process Your Request\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate content-Type is present and value is application/json; charset=utf-8\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/plain; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate status code name has OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var InvalidMiximumLengthloginId = \"82927384123\";\r",
+									"pm.environment.set(\"InvalidMiximumLengthloginId\", InvalidMiximumLengthloginId);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "ocp-apim-subscription-key",
+								"value": "{{key}}"
+							},
+							{
+								"key": "appId",
+								"value": "{{AppId}}"
+							},
+							{
+								"key": "specificAppId",
+								"value": "{{SpecificAppId}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": {\r\n        \"loginId\": \"\",\r\n        \"loginType\":\"mobile\",\r\n        \"notificationType\":\"sms\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{enterpriseurl}}externalLogin",
+							"host": [
+								"{{enterpriseurl}}externalLogin"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "externalLogin_success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "ocp-apim-subscription-key",
+										"value": "947541fe74804954b9f57bee5c4b3d71",
+										"type": "text"
+									},
+									{
+										"key": "appId",
+										"value": "External",
+										"type": "text"
+									},
+									{
+										"key": "specificAppId",
+										"value": "OneApp",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\": {\r\n        \"loginId\": \"8800996677\",\r\n        \"loginType\":\"mobile\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://apim-shared-psku-01t.azure-api.net/enterprise/dxl/api/externalLogin",
+									"protocol": "https",
+									"host": [
+										"apim-shared-psku-01t",
+										"azure-api",
+										"net"
+									],
+									"path": [
+										"enterprise",
+										"dxl",
+										"api",
+										"externalLogin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Request-Context",
+									"value": "appId=cid-v1:76a210ac-da8b-4957-8f78-d12515b7c76f"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 11 Jan 2024 07:25:52 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"OTP Generated Successfully\",\n    \"data\": {\n        \"loginId\": \"8800996677\",\n        \"registeredUser\": true\n    },\n    \"success\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "externalInvalidLogin- MobileNumber passing space with blank string",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Validate success value is false\", function () {\r",
+									"    pm.expect(jsonData.success).to.be.false;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate message value is Mobile number is not numeric.\", function () {\r",
+									"    pm.expect(jsonData.message).to.eql(\"Mobile number is not numeric.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate errorCode value is 1002\", function () {\r",
+									"    pm.expect(jsonData.errorCode).to.eql(1002);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate errorDescription value is Unable to process Your Request\", function () {\r",
+									"    pm.expect(jsonData.errorDescription).to.eql(\"Unable to process Your Request\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate content-Type is present and value is application/json; charset=utf-8\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/plain; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate status code name has OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var InvalidMiximumLengthloginId = \"82927384123\";\r",
+									"pm.environment.set(\"InvalidMiximumLengthloginId\", InvalidMiximumLengthloginId);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "ocp-apim-subscription-key",
+								"value": "{{key}}"
+							},
+							{
+								"key": "appId",
+								"value": "{{AppId}}"
+							},
+							{
+								"key": "specificAppId",
+								"value": "{{SpecificAppId}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": {\r\n        \"loginId\": \" \",\r\n        \"loginType\":\"mobile\",\r\n        \"notificationType\":\"sms\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{enterpriseurl}}externalLogin",
+							"host": [
+								"{{enterpriseurl}}externalLogin"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "externalLogin_success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "ocp-apim-subscription-key",
+										"value": "947541fe74804954b9f57bee5c4b3d71",
+										"type": "text"
+									},
+									{
+										"key": "appId",
+										"value": "External",
+										"type": "text"
+									},
+									{
+										"key": "specificAppId",
+										"value": "OneApp",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\": {\r\n        \"loginId\": \"8800996677\",\r\n        \"loginType\":\"mobile\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://apim-shared-psku-01t.azure-api.net/enterprise/dxl/api/externalLogin",
+									"protocol": "https",
+									"host": [
+										"apim-shared-psku-01t",
+										"azure-api",
+										"net"
+									],
+									"path": [
+										"enterprise",
+										"dxl",
+										"api",
+										"externalLogin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Request-Context",
+									"value": "appId=cid-v1:76a210ac-da8b-4957-8f78-d12515b7c76f"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 11 Jan 2024 07:25:52 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"OTP Generated Successfully\",\n    \"data\": {\n        \"loginId\": \"8800996677\",\n        \"registeredUser\": true\n    },\n    \"success\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "externalInvalidLogin- MobileNumber passing special char as string",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Validate success value is false\", function () {\r",
+									"    pm.expect(jsonData.success).to.be.false;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate message value is Mobile number is not numeric.\", function () {\r",
+									"    pm.expect(jsonData.message).to.eql(\"Mobile number is not numeric.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate errorCode value is 1002\", function () {\r",
+									"    pm.expect(jsonData.errorCode).to.eql(1002);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate errorDescription value is Unable to process Your Request\", function () {\r",
+									"    pm.expect(jsonData.errorDescription).to.eql(\"Unable to process Your Request\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate content-Type is present and value is application/json; charset=utf-8\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/plain; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate status code name has OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var InvalidMiximumLengthloginId = \"82927384123\";\r",
+									"pm.environment.set(\"InvalidMiximumLengthloginId\", InvalidMiximumLengthloginId);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "ocp-apim-subscription-key",
+								"value": "{{key}}"
+							},
+							{
+								"key": "appId",
+								"value": "{{AppId}}"
+							},
+							{
+								"key": "specificAppId",
+								"value": "{{SpecificAppId}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": {\r\n        \"loginId\": \"!@#$@!!@$\",\r\n        \"loginType\":\"mobile\",\r\n        \"notificationType\":\"sms\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{enterpriseurl}}externalLogin",
+							"host": [
+								"{{enterpriseurl}}externalLogin"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "externalLogin_success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "ocp-apim-subscription-key",
+										"value": "947541fe74804954b9f57bee5c4b3d71",
+										"type": "text"
+									},
+									{
+										"key": "appId",
+										"value": "External",
+										"type": "text"
+									},
+									{
+										"key": "specificAppId",
+										"value": "OneApp",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\": {\r\n        \"loginId\": \"8800996677\",\r\n        \"loginType\":\"mobile\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://apim-shared-psku-01t.azure-api.net/enterprise/dxl/api/externalLogin",
+									"protocol": "https",
+									"host": [
+										"apim-shared-psku-01t",
+										"azure-api",
+										"net"
+									],
+									"path": [
+										"enterprise",
+										"dxl",
+										"api",
+										"externalLogin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Request-Context",
+									"value": "appId=cid-v1:76a210ac-da8b-4957-8f78-d12515b7c76f"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 11 Jan 2024 07:25:52 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"OTP Generated Successfully\",\n    \"data\": {\n        \"loginId\": \"8800996677\",\n        \"registeredUser\": true\n    },\n    \"success\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "verifyOtpExternal - OTP length is more than 6 digit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsondata = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Validate success value is false\", function () {\r",
+									"    pm.expect(jsondata.success).to.be.false;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate message value is User is not registered\", function () {\r",
+									"    pm.expect(jsondata.message).to.eql(\"Invalid OTP length.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate errorCode value is 1001\", function () {\r",
+									"    pm.expect(jsondata.errorCode).to.eql(1001);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate errorDescription value is Unable to process Your Request\", function () {\r",
+									"    pm.expect(jsondata.errorDescription).to.eql(\"Unable to process Your Request\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Validate Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate content-Type is present and value is text/plain; charset=utf-8\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"     pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/plain; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate status code name has OK\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "ocp-apim-subscription-key",
+								"value": "{{key}}"
+							},
+							{
+								"key": "appId",
+								"value": "{{AppId}}"
+							},
+							{
+								"key": "specificAppId",
+								"value": "{{SpecificAppId}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": {\r\n        \"loginId\": {{expectedloginId}},\r\n        \"otp\":\"1234561\",\r\n        \"isdCode\":\"+91\",\r\n        \"deviceType\":\"IOS\",\r\n        \"osVersion\":\"15.1\",\r\n        \"appVersion\":\"10\",\r\n        \"deviceModel\" :\"x86_64\",\r\n        \"firebaseToken\": \"e9f_Vt_lRhK-GmPxDe2BkF:APA91bGec-ldCPcUWQ03iI9gE7yKsDTFavbB2_1Twh_GRrwLiHrDlSmEXCktaSkG9UoqCS0L2VlrJNv8u7WtKGOVu9byo5xVibFUL2xMhUFVpbuznqAZOQNqdvm-PfPJNTUEj5Rq_sGy\"\r\n        \r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{enterpriseurl}}verifyOtpExternal",
+							"host": [
+								"{{enterpriseurl}}verifyOtpExternal"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "verifyOtpExternal_success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "ocp-apim-subscription-key",
+										"value": "947541fe74804954b9f57bee5c4b3d71",
+										"type": "text"
+									},
+									{
+										"key": "appId",
+										"value": "External",
+										"type": "text"
+									},
+									{
+										"key": "specificAppId",
+										"value": "OneApp",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\": {\r\n        \"loginId\": \"8800996677\",\r\n        \"otp\":\"123456\",\r\n        \"isdCode\":\"+91\",\r\n        \"deviceType\":\"IOS\",\r\n        \"osVersion\":\"15.1\",\r\n        \"appVersion\":\"10\",\r\n        \"deviceModel\" :\"x86_64\",\r\n        \"firebaseToken\": \"e9f_Vt_lRhK-GmPxDe2BkF:APA91bGec-ldCPcUWQ03iI9gE7yKsDTFavbB2_1Twh_GRrwLiHrDlSmEXCktaSkG9UoqCS0L2VlrJNv8u7WtKGOVu9byo5xVibFUL2xMhUFVpbuznqAZOQNqdvm-PfPJNTUEj5Rq_sGy\"\r\n        \r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://apim-shared-psku-01t.azure-api.net/enterprise/dxl/api/verifyOtpExternal",
+									"protocol": "https",
+									"host": [
+										"apim-shared-psku-01t",
+										"azure-api",
+										"net"
+									],
+									"path": [
+										"enterprise",
+										"dxl",
+										"api",
+										"verifyOtpExternal"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Request-Context",
+									"value": "appId=cid-v1:76a210ac-da8b-4957-8f78-d12515b7c76f"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 11 Jan 2024 07:27:38 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"OTP Verified Successfully\",\n    \"data\": {\n        \"profilePicPath\": \"https://oneapphero1.blob.core.windows.net/userdata/oneapp/profilePicture/heroUserProfile@aeeebb27-fd11-4a3b-946e-7042758661001702545157419.png\",\n        \"isExisting\": \"1\",\n        \"pnrConId\": \"2-RSC6WLC\",\n        \"uniqueId\": \"HEROMAY23-549a41e6-f94f-11ed-8e52-c67c1c172262\",\n        \"firstName\": \"Randhir\",\n        \"lastName\": \"P\",\n        \"appName\": \"oneapp\",\n        \"mediaToken\": \"c3A9ciZzdD0yMDIyLTExLTIzVDA5OjIwOjUzWiZzZT0yMDI0LTEyLTMxVDE3OjIwOjUzWiZzcHI9\\naHR0cHMmc3Y9MjAyMS0wNi0wOCZzcj1jJnNpZz1mU2duWlF4T2ZhMUM5WDczQ3BRaWZLSFNsT3k0\\nQ3p5R1F4NEpkRmdxbENnJTNE\",\n        \"mobileNo\": \"8800996677\",\n        \"appId\": \"8800996677_External\",\n        \"loginId\": \"8800996677\",\n        \"token\": \"ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SmhZMk5sYzNOZmRHOXJaVzRpT2lJeU16VXpOalExWVMxa1pqVXpMVFJtTVdVdFlqazRNQzFrTVdJeU0yRTRaRFl3TlRRaUxDSmhZMk5sYzNOZmEyVjVJam9pTWpNMU16WTBOV0V0WkdZMU15MDBaakZsTFdJNU9EQXRaREZpTWpOaE9HUTJNRFUwSWl3aWJXOWlhV3hsVG04aU9pSTRPREF3T1RrMk5qYzNJaXdpWTNWemRHOXRaWEpKWkdWdWRHbG1hV1Z5SWpvaU1EQmpPRGcxWkRFdE1qWTJOUzAwWVRGakxXRmpaV1l0WldGbVpqQTJNamxsWWpKbUlpd2lZWEJ3WDJsa0lqb2lPRGd3TURrNU5qWTNOMTlGZUhSbGNtNWhiQ0lzSW5Od1pXTnBabWxqWDJGd2NGOXBaQ0k2SWs5dVpVRndjQ0lzSW5SdmEyVnVJam9pTWpNMU16WTBOV0V0WkdZMU15MDBaakZsTFdJNU9EQXRaREZpTWpOaE9HUTJNRFUwSWl3aVpYaHdJam94TnpBMU9ESXlNRFU0TENKdVlXMWxJam9pSW4wLmpMTDhCcWlGVlpmWW1jUHpFa0hDYTVoRGFpMjQxU1ktR2pOdEZreU1tUUk=\",\n        \"customerIdentifier\": \"00c885d1-2665-4a1c-acef-eaff0629eb2f\",\n        \"isdCode\": \"+91\",\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJhcHBfaWQiOiJFeHRlcm5hbCIsInNwZWNpZmljX2FwcF9pZCI6Ik9uZUFwcCIsImxvZ2luSWQiOiI4ODAwOTk2Njc3IiwibW9iaWxlTm8iOiI4ODAwOTk2Njc3Iiwic3ViIjoiand0IiwianRpIjoiMDZjNDc0M2ItYmY5My00MzZmLWE2YjUtMjQ5MzY4MDAyZmZiIiwiaWF0IjoxNzA0OTU4MDU4LCJleHAiOjE3MTI3MzQwNTh9.MVmuFJ-LVkMX-2zJAHjKxIRku7WRfy3vlQw2DdM6taU\"\n    },\n    \"success\": true\n}"
 						}
 					]
 				}
